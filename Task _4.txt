@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Historical Timeline Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="p-6 bg-blue-600 text-white text-center text-2xl font-semibold">
+        Interactive Historical Timeline Viewer
+    </header>
+
+    <main class="p-4 max-w-4xl mx-auto">
+        <!-- Input Form -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Add an Event</h2>
+            <form id="timelineForm" class="grid grid-cols-1 gap-4">
+                <div>
+                    <label for="title" class="block mb-2 font-semibold">Event Title:</label>
+                    <input type="text" id="title" name="title" class="w-full p-2 border rounded" placeholder="Enter event title" required />
+                </div>
+                <div>
+                    <label for="date" class="block mb-2 font-semibold">Date:</label>
+                    <input type="date" id="date" name="date" class="w-full p-2 border rounded" required />
+                </div>
+                <div>
+                    <label for="description" class="block mb-2 font-semibold">Description:</label>
+                    <textarea id="description" name="description" rows="3" class="w-full p-2 border rounded" placeholder="Enter event description" required></textarea>
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add Event</button>
+            </form>
+        </section>
+
+        <!-- Timeline Display -->
+        <section>
+            <h2 class="text-xl font-bold mb-4">Timeline</h2>
+            <div id="timeline" class="space-y-6">
+                <p class="text-center text-gray-500">No events added yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const timelineForm = document.getElementById('timelineForm');
+        const timeline = document.getElementById('timeline');
+
+        const events = []; // Store events in memory
+
+        timelineForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const title = document.getElementById('title').value.trim();
+            const date = document.getElementById('date').value;
+            const description = document.getElementById('description').value.trim();
+
+            // Input validation
+            if (!title || !date || !description) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Add event to the array
+            events.push({ title, date, description });
+
+            // Sort events by date
+            events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            // Update timeline display
+            updateTimeline();
+
+            // Clear form
+            timelineForm.reset();
+        });
+
+        function updateTimeline() {
+            if (events.length === 0) {
+                timeline.innerHTML = '<p class="text-center text-gray-500">No events added yet.</p>';
+                return;
+            }
+
+            timeline.innerHTML = '';
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'p-4 border rounded shadow bg-white';
+                eventCard.innerHTML = `
+                    <h3 class="text-lg font-bold mb-2">${event.title}</h3>
+                    <p class="text-sm text-gray-500 mb-2">${new Date(event.date).toLocaleDateString()}</p>
+                    <p>${event.description}</p>
+                `;
+                timeline.appendChild(eventCard);
+            });
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Historical Timeline Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="p-6 bg-blue-600 text-white text-center text-2xl font-semibold">
+        Interactive Historical Timeline Viewer
+    </header>
+
+    <main class="p-4 max-w-4xl mx-auto">
+        <!-- Input Form -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Add an Event</h2>
+            <form id="timelineForm" class="grid grid-cols-1 gap-4">
+                <div>
+                    <label for="title" class="block mb-2 font-semibold">Event Title:</label>
+                    <input type="text" id="title" name="title" class="w-full p-2 border rounded" placeholder="Enter event title" required />
+                </div>
+                <div>
+                    <label for="date" class="block mb-2 font-semibold">Date:</label>
+                    <input type="date" id="date" name="date" class="w-full p-2 border rounded" required />
+                </div>
+                <div>
+                    <label for="description" class="block mb-2 font-semibold">Description:</label>
+                    <textarea id="description" name="description" rows="3" class="w-full p-2 border rounded" placeholder="Enter event description" required></textarea>
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add Event</button>
+            </form>
+        </section>
+
+        <!-- Timeline Display -->
+        <section>
+            <h2 class="text-xl font-bold mb-4">Timeline</h2>
+            <div id="timeline" class="space-y-6">
+                <p class="text-center text-gray-500">No events added yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const timelineForm = document.getElementById('timelineForm');
+        const timeline = document.getElementById('timeline');
+
+        const events = []; // Store events in memory
+
+        timelineForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const title = document.getElementById('title').value.trim();
+            const date = document.getElementById('date').value;
+            const description = document.getElementById('description').value.trim();
+
+            // Input validation
+            if (!title || !date || !description) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Add event to the array
+            events.push({ title, date, description });
+
+            // Sort events by date
+            events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            // Update timeline display
+            updateTimeline();
+
+            // Clear form
+            timelineForm.reset();
+        });
+
+        function updateTimeline() {
+            if (events.length === 0) {
+                timeline.innerHTML = '<p class="text-center text-gray-500">No events added yet.</p>';
+                return;
+            }
+
+            timeline.innerHTML = '';
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'p-4 border rounded shadow bg-white';
+                eventCard.innerHTML = `
+                    <h3 class="text-lg font-bold mb-2">${event.title}</h3>
+                    <p class="text-sm text-gray-500 mb-2">${new Date(event.date).toLocaleDateString()}</p>
+                    <p>${event.description}</p>
+                `;
+                timeline.appendChild(eventCard);
+            });
+        }
+    </script>
+</body>
+</html>
